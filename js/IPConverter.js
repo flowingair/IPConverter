@@ -102,8 +102,8 @@ class IPConverter {
     }
 
     /**
-     * 
-     * @param {string} data 
+     *
+     * @param {string} data
      * @returns number
      */
     stringToNumber(data) {
@@ -120,8 +120,8 @@ class IPConverter {
     }
 
     /**
-     * 
-     * @param {string} data 
+     *
+     * @param {string} data
      */
     stringToIPv4(data) {
         let tmp = data.split(".");
@@ -257,7 +257,7 @@ class IPConverter {
 
     /**
      * Converts the IP address to a string representation.
-     * @return {Array} The IP address as a string.
+     * @return {{}} The IP address as a string.
      */
     toString() {
         if (this.type === IPConverter.Type.IPV4) {
@@ -290,7 +290,7 @@ class IPConverter {
             isFirst = true;
             for (let i = 0; i < this.ipv6.length; i++) {
                 if (!isFirst) {
-                    r["Shirt"] = r["Shirt"] + ":";
+                    r["Short"] = r["Short"] + ":";
                 } else {
                     isFirst = false;
                 }
@@ -302,11 +302,11 @@ class IPConverter {
                         }
                         i = i + j - 1;
                         if (i >= this.ipv6.length) {
-                            r["Shirt"] = r["Shirt"] + ":";
+                            r["Short"] = r["Short"] + ":";
                         }
                     }
                 } else {
-                    r["Shirt"] = r["Shirt"] + this.ipv6[i].toString(16);
+                    r["Short"] = r["Short"] + this.ipv6[i].toString(16);
                 }
             }
             r["Complex"] = "";
