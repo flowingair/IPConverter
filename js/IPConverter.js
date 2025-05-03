@@ -296,6 +296,7 @@ class IPConverter {
                 }
                 if (isFirstColon && 0 === this.ipv6[i]) {
                     isFirstColon = false;
+                    r["Short"] = r["Short"] + ":";
                     for (let j = 0; j < this.ipv6.length - i; j++) {
                         if (0 === this.ipv6[i + j]) {
                             continue;
