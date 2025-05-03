@@ -180,38 +180,12 @@ class IPConverter {
             default:
                 throw new Error("IPConverter: data has an invalid number of colons");
             case 3:
-                // ::1 ::127.0.0.1 1::
-                if ("" === tmp[0] && "" === tmp[1]) {
-                    if (tmp[2].indexOf(".") >= 0) {
-                        this.ipv6.push(0);
-                        this.ipv6.push(0);
-                        this.ipv6.push(0);
-                        this.ipv6.push(0);
-                        this.stringToIPv4(tmp[2]);
-                        this.ipv6.push(this.ipv4[0]);
-                        this.ipv6.push(this.ipv4[1]);
-                        this.ipv6.push(this.ipv4[2]);
-                        this.ipv6.push(this.ipv4[3]);
-                    } else {
-                        for (let i = 0; i < 7; i++) {
-                            this.ipv6.push(0);
-                        }
-                        this.ipv6.push(parseInt(tmp[2], 16));
-                    }
-                }
-                if ("" === tmp[1] && "" === tmp[2]) {
-                    this.ipv6.push(parseInt(tmp[0], 16));
-                    for (let i = 0; i < 7; i++) {
-                        this.ipv6.push(0);
-                    }
-                }
-                break;
             case 4:
             case 5:
             case 6:
             case 7:
                 if (data.indexOf("::") >= 0) {
-                    if (data.indexOf("." >= 0)) {
+                    if (data.indexOf(".") >= 0) {
                         for (let i = 0; i < tmp.length - 1; i++) {
                             if (tmp[i].indexOf(".") >= 0) {
                                 throw new Error("Invalid IPv6 address");
@@ -229,9 +203,13 @@ class IPConverter {
                         }
                     } else {
                         for (let i = 0; i < tmp.length; i++) {
-                            if (i + 1 < tmp.length && "" === tmp[i] && "" === tmp[i + 1]) {
+                            if ("" === tmp[i]) {
                                 for (let j = 0; j < 9 - tmp.length; j++) {
                                     this.ipv6.push(0);
+                                }
+                                if (i + 1 < tmp.length && "" === tmp[i + 1]) {
+                                    this.ipv6.push(0);
+                                    i = i + 1;
                                 }
                             } else {
                                 this.ipv6.push(parseInt(tmp[i], 16));
